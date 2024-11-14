@@ -117,5 +117,22 @@ class WindowsEvent(Event):
                 win32api.keybd_event(86, 0, 0, 0)  # v
                 win32api.keybd_event(86, 0, win32con.KEYEVENTF_KEYUP, 0)
                 win32api.keybd_event(162, 0, win32con.KEYEVENTF_KEYUP, 0)
+            elif self.message == 'inputrandom':
+                import random
+                word_count=random.randint(3, 6)
+                random_words = ''
+                print('----modified word count:', word_count)
+                for i in range(word_count):
+                    random_word = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz', k=random.randint(2, 6)))
+                    print('----modified random_word:', random_word)
+                    random_words += random_word + ' '
+                text = random_words
+                print('----modified text:', text)
+                pyperclip.copy(text)
+                # Ctrl+V
+                win32api.keybd_event(162, 0, 0, 0)  # ctrl
+                win32api.keybd_event(86, 0, 0, 0)  # v
+                win32api.keybd_event(86, 0, win32con.KEYEVENTF_KEYUP, 0)
+                win32api.keybd_event(162, 0, win32con.KEYEVENTF_KEYUP, 0)
             else:
                 logger.warning('Unknown extra event:%s' % self.message)
