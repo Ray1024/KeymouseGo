@@ -4,6 +4,7 @@ import win32api
 
 from Event.Event import Event
 from loguru import logger
+import common.util as util
 
 import ctypes
 import win32con
@@ -128,6 +129,14 @@ class WindowsEvent(Event):
                     random_words += random_word + ' '
                 text = random_words
                 print('----modified text:', text)
+                pyperclip.copy(text)
+                # Ctrl+V
+                win32api.keybd_event(162, 0, 0, 0)  # ctrl
+                win32api.keybd_event(86, 0, 0, 0)  # v
+                win32api.keybd_event(86, 0, win32con.KEYEVENTF_KEYUP, 0)
+                win32api.keybd_event(162, 0, win32con.KEYEVENTF_KEYUP, 0)
+            elif self.message == 'inputrandom_ch':
+                text = util.generate_random_common_chinese(4, 9)
                 pyperclip.copy(text)
                 # Ctrl+V
                 win32api.keybd_event(162, 0, 0, 0)  # ctrl
