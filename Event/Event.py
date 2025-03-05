@@ -24,6 +24,10 @@ class Event(metaclass=ABCMeta):
 
     # 延时
     def sleep(self, thd=None):
+        if self.delay == -1:
+            import random
+            self.delay = random.randint(100, 1000)
+            print('random time',self.delay)
         if thd:
             thd.sleep(self.delay)
         else:
