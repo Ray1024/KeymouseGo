@@ -136,7 +136,7 @@ class WindowsEvent(Event):
                 win32api.keybd_event(86, 0, win32con.KEYEVENTF_KEYUP, 0)
                 win32api.keybd_event(162, 0, win32con.KEYEVENTF_KEYUP, 0)
             elif self.message == 'inputrandom_ch':
-                text = util.generate_random_common_chinese(4, 9)
+                text = util.generate_random_common_chinese()
                 pyperclip.copy(text)
                 # Ctrl+V
                 win32api.keybd_event(162, 0, 0, 0)  # ctrl
